@@ -1,4 +1,4 @@
-package src.banking.member.repository;
+package src.banking.member.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import src.banking.common.exception.CustomException;

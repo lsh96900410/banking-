@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum BankType {
 
-   기업은행, 농협은행, 신한은행;
+   기업은행, 농협은행, 카카오뱅크;
 
 
 }
