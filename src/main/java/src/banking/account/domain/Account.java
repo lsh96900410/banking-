@@ -59,11 +59,11 @@ public class Account extends BaseTimeEntity {
     private class AccountNumber{
         private String accountNumber;
         private short count = 0;
-        public AccountNumber(BankType type) {
+        private AccountNumber(BankType type) {
             this.accountNumber = createAccountNum(bankUniqueNum(type));
         }
 
-        private int bankUniqueNum(BankType type){
+        private String bankUniqueNum(BankType type){
 
             switch (type){
                 case 기업은행 -> {return IBK_UNIQUE_NUMBER;}
@@ -74,14 +74,14 @@ public class Account extends BaseTimeEntity {
             return NOT_EXIST_BANK_TYPE;
         }
 
-        private String createAccountNum(int uniqueNum){
+        private String createAccountNum(String uniqueNum){
             Random random =new Random();
             String num = "";
 
             for (int i = 0; i < 5 ; i++){ num += Integer.toString(random.nextInt(9)); }
             count++;
 
-            return Integer.toString(uniqueNum)+ "-" + String.format("$04d",count) + "-" + num ;
+            return uniqueNum + "-" + String.format("$04d",count) + "-" + num ;
 
         }
     }
