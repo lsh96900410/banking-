@@ -3,7 +3,7 @@ package src.banking.transaction.application;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import src.banking.transaction.repository.TransactionRepository;
+import src.banking.transaction.persistence.TransactionRepository;
 
 @Service
 @Slf4j

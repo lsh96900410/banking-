@@ -1,4 +1,4 @@
-package src.banking.transaction.repository;
+package src.banking.transaction.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import src.banking.transaction.domain.Transaction;
