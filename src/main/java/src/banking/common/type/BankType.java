@@ -7,5 +7,4 @@ public enum BankType {
 
    기업은행, 농협은행, 카카오뱅크;
 
-
 }

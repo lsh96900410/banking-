@@ -1,11 +1,19 @@
 package src.banking.member;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import src.banking.member.domain.Member;
+import src.banking.member.dto.JoinMember;
+import src.banking.member.persistence.MemberRepository;
 
 @SpringBootTest
 public class Application {
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Test
     @DisplayName("회원가입")
@@ -14,12 +22,14 @@ public class Application {
         /* 회원 정보 */
 
 
+
         // when
         /* 회원 가입 로직 실행 */
 
 
         // then
         /* 정상 */
+
     }
     
     @Test

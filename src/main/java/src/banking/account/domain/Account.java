@@ -8,18 +8,15 @@ import src.banking.account.dto.CreateAccount;
 import src.banking.common.BaseTimeEntity;
 import static src.banking.common.constant.NumberName.*;
 
-import src.banking.common.exception.CustomException;
 import src.banking.common.type.BankType;
 import src.banking.common.constant.LiteralName;
 import src.banking.member.domain.Member;
 
-import javax.print.attribute.standard.PrinterMakeAndModel;
 import java.util.Random;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Account extends BaseTimeEntity {
 
@@ -44,8 +41,10 @@ public class Account extends BaseTimeEntity {
     private String accountName;
 
     @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
+    @Builder
     public Account(CreateAccount createAccount,Member member){
         this.bankType = createAccount.bankType();
         this.amount=createAccount.amount();
@@ -56,7 +55,7 @@ public class Account extends BaseTimeEntity {
 
     @Embeddable
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    private class AccountNumber{
+    static class AccountNumber{
         private String accountNumber;
         private short count = 0;
         private AccountNumber(BankType type) {

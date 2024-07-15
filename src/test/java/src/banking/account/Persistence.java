@@ -1,12 +1,32 @@
 package src.banking.account;
 
+import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import src.banking.account.domain.Account;
+import src.banking.account.dto.CreateAccount;
+import src.banking.account.persistence.AccountRepository;
+import src.banking.common.type.BankType;
+import src.banking.member.domain.Member;
+import src.banking.member.dto.JoinMember;
+import src.banking.member.persistence.MemberRepository;
 
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class Persistence {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
+    private TestEntityManager entityManager;
 
     @Test
     @DisplayName("정상 계좌 생성")
@@ -14,29 +34,30 @@ public class Persistence {
     void createAccountOK (){
         // given
         /* 등록된 은행 타입 */
+        CreateAccount newAccount = new CreateAccount(BankType.기업은행,10000L,"테스트계좌");
+        JoinMember joinMemberData = new JoinMember("테스트1","테스트 회원");
+        Member joinMember = new Member(joinMemberData);
+        Account account = new Account(newAccount,joinMember);
 
+        Member save = memberRepository.save(joinMember);
 
+        //entityManager.persist(save);
         // when
         /* create Query */
+        Account saveAcc = accountRepository.save(account);
 
-
-        // then
-        /* 은행 종류 별 규칙에 따라 계좌 번호가 생성된다. */
-    }
-
-    @Test
-    @DisplayName("계좌 생성 실패")
-    void badBankTypeAtCreateAccount () {
-        // given
-        /* 등록되지 않은 은행 타입 */
-
-
-        // when
-        /* create Query  */
-
+        //entityManager.persist(saveAcc);
 
         // then
-        /* 등록되지 않은 은행 타입 예외 상황 발생 */
+
+        assertThat(saveAcc.getBankType()).isEqualTo(newAccount.bankType());
+        assertThat(saveAcc.getAccountName()).isEqualTo(newAccount.accountName());
+        assertThat(saveAcc.getMember()).isEqualTo(joinMember);
+        assertThat(saveAcc.getAmount()).isEqualTo(newAccount.amount());
+        assertThat(saveAcc.getMember().getUsername()).isEqualTo(joinMember.getUsername());
+        assertThat(saveAcc.getMember().getNickname()).isEqualTo(joinMember.getNickname());
+
+
     }
     
     @Test
