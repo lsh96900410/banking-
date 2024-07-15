@@ -81,8 +81,9 @@ public class Persistence {
     @DisplayName("목록 조회")
     void list(){
         // given
-
-
+        memberRepository.save(new Member(new JoinMember("테스트 3", "테스트 1")));
+        memberRepository.save(new Member(new JoinMember("테스트 1", "테스트 2")));
+        memberRepository.save(new Member(new JoinMember("테스트 2", "테스트 3")));
         // when
         List<Member> all = memberRepository.findAll();
 
@@ -90,7 +91,7 @@ public class Persistence {
         // then
 
 
-        assertThat(all.size()).isEqualTo(0);
+        assertThat(all.size()).isEqualTo(3);
     }
 
     @Test
