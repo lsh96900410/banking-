@@ -11,7 +11,7 @@ public class ExistQuery {
 
     private final JPAQueryFactory queryFactory;
 
-    public Boolean existMember(String userName){
+    private Boolean existMember(String userName){
         Integer result = queryFactory.selectOne().from(member).where(member.username.eq(userName)).fetchFirst();
 
         return  result != null ;
