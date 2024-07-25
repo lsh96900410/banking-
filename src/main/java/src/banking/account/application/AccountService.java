@@ -55,9 +55,6 @@ public class AccountService {
     }
 
 
-
-
-
     private Account findAccount(Long id){
         return accountRepository.findById(id)
                 .orElseThrow(() -> new CustomException(NOT_FOUND_ACCOUNT));
