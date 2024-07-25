@@ -15,6 +15,8 @@ public enum ExceptionType {
     
     NOT_FOUND_ACCOUNT("존재하지 않는 계좌입니다."),
 
+    EXIST_ACCOUNT_NUMBER("이미 존재하는 계좌번호입니다."),
+
     EXIST_MEMBER("이미 존재하는 아이디입니다.");
 
     private final String message;

@@ -53,6 +53,17 @@ public class Account extends BaseTimeEntity {
         this.member=member;
     }
 
+    public boolean changeAccountName(String newAccountName){
+
+        if(this.accountNumber.equals(newAccountName)){
+            return false;
+        }
+
+        this.accountName=newAccountName;
+
+        return true;
+    }
+
     @Embeddable
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     static class AccountNumber{
