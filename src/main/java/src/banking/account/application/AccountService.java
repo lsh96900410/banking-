@@ -55,6 +55,14 @@ public class AccountService {
     }
 
 
+   /* 금액 관련 로직
+      <트랜잭션 전파 설정>
+
+      1. 계좌 이체 - 입금 + 출금
+      2. 입금 - 입금
+      3. 출금 - 출금
+   */
+
     private Account findAccount(Long id){
         return accountRepository.findById(id)
                 .orElseThrow(() -> new CustomException(NOT_FOUND_ACCOUNT));
